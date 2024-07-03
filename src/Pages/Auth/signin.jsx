@@ -23,6 +23,7 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
         const resp = await fetch("http://localhost:5000/api/auth/login", {
             method: "POST",
             headers: {
@@ -40,6 +41,26 @@ function Signin() {
         } else {
             setErrorMessage("Invalid credentials. Please try again.");
         }
+=======
+      const resp = await fetch("https://careerdhrishti-backend.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const res = await resp.json();
+      localStorage.setItem("token", res.token);
+      console.log(res);
+      if (res.message !== "invalid Credentials") {
+        
+        navigate("/");
+        alert("login successful, click Ok to continue")
+        
+      } else {
+        setErrorMessage("Invalid credentials. Please try again.");
+      }
+>>>>>>> 54dc273bed47ca61003069a6f4781beb2cf825f5
     } catch (error) {
         console.log(error);
         setErrorMessage("An error occurred. Please try again.");

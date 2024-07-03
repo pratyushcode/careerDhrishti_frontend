@@ -22,7 +22,7 @@ const Portfolio = () => {
 
   const fetchResources = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/resource/");
+      const response = await axios.get("https://careerdhrishti-backend.onrender.com/api/resource/");
       setResources(response.data.resource);
       console.log(response);
     } catch (error) {

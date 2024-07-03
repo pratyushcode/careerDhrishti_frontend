@@ -29,7 +29,7 @@ function Signup() {
     // console.log("name",formData.name)
     // console.log("password",formData.password)
     try {
-      const resp = await fetch("http://localhost:5000/api/user/signup", {
+      const resp = await fetch("https://careerdhrishti-backend.onrender.com/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/JSON",

@@ -9,7 +9,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/blog/");
+        const response = await fetch("https://careerdhrishti-backend.onrender.com/api/blog/");
         const data = await response.json();
         console.log("API Response:", data);
         
