@@ -50,13 +50,8 @@ function Chatbot() {
   }, [chatHistory, isLoading]);
 
   return (
-<<<<<<< HEAD
     <div id="chat-container" className='w-[350px] flex-col justify-center item-center border-2 border-[#3758f9] rounded-md '>
       <h1 className='text-center text-xl bg-slate-50 ' style={{ color: '#3758f9' }}>CareerDrishti.ai</h1>
-=======
-    <div id="chat-container" className='w-[350px] flex-col justify-center item-center border-2 border-[#3758f9] rounded-md'>
-      <h1 className='text-center text-xl bg-slate-50' style={{ color: '#3758f9' }}>CareerDrishti.ai</h1>
->>>>>>> 54dc273bed47ca61003069a6f4781beb2cf825f5
       <div
         id="chat-history"
         ref={chatHistoryRef}
@@ -66,7 +61,6 @@ function Chatbot() {
         {chatHistory.map((message, index) => (
           <div
             key={index}
-<<<<<<< HEAD
             className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} items-center mb-2`}
           >
             {!message.isUser && (
@@ -91,18 +85,6 @@ function Chatbot() {
                 <i className="fas fa-user fa-2x text-primary mr-2" style={{ marginLeft: '10px' }}></i>
               </div>
             )}
-=======
-            className="boder-2 border-black"
-            style={{
-              padding: '10px',
-              textAlign: message.isUser ? 'right' : 'left',
-              background: message.isUser ? '#3758f9' : 'white',
-              color: message.isUser ? 'white' : 'black',
-              margin: ''
-            }}
-          >
-            <ReactMarkdown className="p-3">{message.text.split(' ').slice(0, 100).join(' ')}</ReactMarkdown>
->>>>>>> 54dc273bed47ca61003069a6f4781beb2cf825f5
           </div>
         ))}
         {/* Typing indicator */}
@@ -128,19 +110,11 @@ function Chatbot() {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Enter your message"
-<<<<<<< HEAD
             style={{ marginRight: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', width: '65%' }}
           />
           <button
             type="submit"
             className="mx-2"
-=======
-            style={{ marginRight: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}
-          />
-          <button
-            type="submit"
-            className="mx-7"
->>>>>>> 54dc273bed47ca61003069a6f4781beb2cf825f5
             style={{
               backgroundColor: isLoading ? 'lightgray' : '#3758f9',
               color: 'white',
