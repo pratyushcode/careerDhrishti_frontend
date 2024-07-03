@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import ReactMarkdown from "react-markdown";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Chatbot() {
   const [chatHistory, setChatHistory] = useState([
@@ -49,8 +50,8 @@ function Chatbot() {
   }, [chatHistory, isLoading]);
 
   return (
-    <div id="chat-container" className='w-[350px] flex-col justify-center item-center border-2 border-[#3758f9] rounded-md'>
-      <h1 className='text-center text-xl bg-slate-50' style={{ color: '#3758f9' }}>CareerDrishti.ai</h1>
+    <div id="chat-container" className='w-[350px] flex-col justify-center item-center border-2 border-[#3758f9] rounded-md '>
+      <h1 className='text-center text-xl bg-slate-50 ' style={{ color: '#3758f9' }}>CareerDrishti.ai</h1>
       <div
         id="chat-history"
         ref={chatHistoryRef}
@@ -60,16 +61,30 @@ function Chatbot() {
         {chatHistory.map((message, index) => (
           <div
             key={index}
-            className="boder-2 border-black"
-            style={{
-              padding: '10px',
-              textAlign: message.isUser ? 'right' : 'left',
-              background: message.isUser ? '#3758f9' : 'white',
-              color: message.isUser ? 'white' : 'black',
-              margin: ''
-            }}
+            className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} items-center mb-2`}
           >
-            <ReactMarkdown className="p-3">{message.text.split(' ').slice(0, 100).join(' ')}</ReactMarkdown>
+            {!message.isUser && (
+              <div className="flex-shrink-0">
+                <i className="fas fa-robot fa-2x text-primary ml-2" style={{ marginRight: '10px' }}></i>
+              </div>
+            )}
+            <div
+              style={{
+                background: message.isUser ? '#d0eaff' : '#d3d3d3',
+                color: message.isUser ? 'black' : 'black',
+                padding: '10px 15px', 
+                borderRadius: '15px',
+                maxWidth: '70%',
+                wordBreak: 'break-word'
+              }}
+            >
+              <ReactMarkdown>{message.text}</ReactMarkdown>
+            </div>
+            {message.isUser && (
+              <div className="flex-shrink-0">
+                <i className="fas fa-user fa-2x text-primary mr-2" style={{ marginLeft: '10px' }}></i>
+              </div>
+            )}
           </div>
         ))}
         {/* Typing indicator */}
@@ -95,11 +110,11 @@ function Chatbot() {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Enter your message"
-            style={{ marginRight: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}
+            style={{ marginRight: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', width: '65%' }}
           />
           <button
             type="submit"
-            className="mx-7"
+            className="mx-2"
             style={{
               backgroundColor: isLoading ? 'lightgray' : '#3758f9',
               color: 'white',

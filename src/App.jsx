@@ -14,6 +14,8 @@ import QuizResult from './Pages/QuizResult'
 import Chatbot from './Components/ChatBot'
 import Signup from './Pages/Auth/signup'
 import Signin from './Pages/Auth/signin'
+import Dashboard from './Pages/profile/MyProfile'
+
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,6 +67,8 @@ function App() {
           <Route path="/QuizResult" element={<QuizResult/>}></Route>
           <Route path="/signup" element={<Signup></Signup>}></Route>
           <Route path="/signin" element={<Signin/>}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
+          
 
         </Routes>
       </Router>

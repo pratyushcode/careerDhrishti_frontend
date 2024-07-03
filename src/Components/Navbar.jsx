@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.jpg";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    setUserName(null);
+    // Optionally, redirect to home or login page
+  };
+
+  useEffect(() => {
+    const name = localStorage.getItem("userName");
+    console.log(name);
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
+
 
   return (
     <nav className="bg-white px-2 py-2.5 w-full rounded shadow">
@@ -22,7 +46,7 @@ const Navbar = () => {
           </Link>
         </a>
 
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <button
             id="menu-toggle"
             type="button"
@@ -54,18 +78,39 @@ const Navbar = () => {
         </div>
 
         <div className="hidden justify-end gap-8 sm:flex lg:pr-0">
-          <Link
-            to={"/signin"}
-            className="px-7 py-3 text-base rounded-md font-medium text-dark  bg-dark text-white bg-primary hover:bg-primary/90"
-          >
-            Sign in
-          </Link>
-          <Link
-            to={"/signup"}
-            className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
-          >
-            Sign Up
-          </Link>
+          {userName ? (
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center space-x-2 text-base rounded-md font-medium text-dark bg-dark text-white bg-primary hover:bg-primary/90 px-4 py-2"
+              >
+                <FontAwesomeIcon icon={faUser} />
+                <span>Welcome, {userName}</span>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                  <Link to="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">My Profile</Link>
+                  
+                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-200">Log Out</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/signin"
+                className="px-7 py-3 text-base rounded-md font-medium text-dark  bg-dark text-white bg-primary hover:bg-primary/90"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/signup"
+                className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

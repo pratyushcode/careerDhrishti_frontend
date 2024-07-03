@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
-
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  
+  const [loading, setLoading] = useState(true); // Add loading state
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -20,6 +20,8 @@ const Blog = () => {
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false); // Set loading to false after data is fetched
       }
     };
 
@@ -43,15 +45,21 @@ const Blog = () => {
           </div>
 
           <div className="-mx-4 flex flex-wrap">
-            {blogs.map((blog) => (
-              <BlogCard
-                key={blog._id}
-                date={blog.date}
-                CardTitle={blog.title}
-                CardDescription={blog.description}
-                image={blog.image}
-              />
-            ))}
+            {loading ? ( // Conditionally render loading spinner or message
+              <div className="w-full text-center">
+                <div className="text-primary text-xl font-semibold">Loading...</div>
+              </div>
+            ) : (
+              blogs.map((blog) => (
+                <BlogCard
+                  key={blog._id}
+                  date={blog.date}
+                  CardTitle={blog.title}
+                  CardDescription={blog.description}
+                  image={blog.image}
+                />
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -96,4 +104,3 @@ const BlogCard = ({ image, date, CardTitle, CardDescription }) => {
     </div>
   );
 };
-

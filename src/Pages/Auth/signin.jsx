@@ -23,34 +23,34 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const res = await resp.json();
-      localStorage.setItem("token", res.token);
-      console.log(res);
-      if (res.message !== "invalid Credentials") {
-        
-        navigate("/");
-        alert("login successful, click Ok to continue")
-        
-      } else {
-        setErrorMessage("Invalid credentials. Please try again.");
-      }
+        const resp = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        const res = await resp.json();
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("userName", res.token.username); // Store the username
+        console.log(res.token.username);
+        if (res.message !== "invalid Credentials") {
+            navigate("/");
+            alert("login successful, click Ok to continue");
+        } else {
+            setErrorMessage("Invalid credentials. Please try again.");
+        }
     } catch (error) {
-      console.log(error);
-      setErrorMessage("An error occurred. Please try again.");
+        console.log(error);
+        setErrorMessage("An error occurred. Please try again.");
     } finally {
-      setFormData({
-        email: "",
-        password: "",
-      });
+        setFormData({
+            email: "",
+            password: "",
+        });
     }
-  };
+};
+
 
   return (
     <section className="relative bg-white flex justify-center items-center h-screen">
